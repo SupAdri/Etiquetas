@@ -16,7 +16,7 @@ export async function GenerarDocx(etiq: Etiqueta[]) {
         {
             properties: {
                 page: {
-                    size: { orientation: "landscape" }, // horizontal
+                    size: { orientation: "landscape" as const }, // horizontal
                 },
             },
             children: Object.entries(agrupado).flatMap(([departamento, lista]) => {
@@ -59,7 +59,7 @@ export async function GenerarDocx(etiq: Etiqueta[]) {
         }
     ];
 
-    const doc = new Document({ sections });
+    const doc = new Document({ sections  }) ;
     const blob = await Packer.toBlob(doc);
     saveAs(blob, `Etiquetas ${new Date().toLocaleDateString()}.docx`);
     alert("Documento creado exitosamente.")
